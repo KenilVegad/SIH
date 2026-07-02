@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ground Management | Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/app.css}">
+    <style>
+        .ground-management-layout {
+            margin-top: 32px;
+            align-items: start;
+        }
+
+        .ground-form-panel,
+        .ground-catalog-panel {
+            min-height: 100%;
+        }
+
+        .ground-form-panel p {
+            max-width: 34ch;
+        }
+
+        .ground-catalog-panel {
+            padding-bottom: 24px;
+        }
+
+        .ground-list {
+            display: grid;
+            gap: 18px;
+        }
+
+        .ground-card {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 20px;
+            align-items: center;
+            padding: 22px 24px;
+            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        }
+
+        .ground-card-main {
+            min-width: 0;
+        }
+
+        .ground-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .ground-heading {
+            display: grid;
+            gap: 6px;
+        }
+
+        .ground-id {
+            color: var(--accent-2);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .ground-name {
+            margin: 0;
+            color: var(--text);
+            font-size: 1.18rem;
+            font-weight: 700;
+            line-height: 1.25;
+        }
+
+        .ground-type-chip {
+            flex-shrink: 0;
+        }
+
+        .ground-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .ground-meta-item {
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .ground-meta-wide {
+            grid-column: 1 / -1;
+        }
+
+        .ground-meta-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--muted);
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .ground-meta-value {
+            display: block;
+            color: var(--text);
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.45;
+            overflow-wrap: anywhere;
+        }
+
+        .ground-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .ground-action-button {
+            min-width: 148px;
+            min-height: 52px;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .admin-ground-submit {
+            margin-top: 10px;
+            min-height: 56px;
+            width: 100%;
+            padding: 14px 22px;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .ground-card {
+                grid-template-columns: 1fr;
+            }
+
+            .ground-actions {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .ground-card {
+                padding: 18px;
+            }
+
+            .ground-card-top {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 14px;
+            }
+
+            .ground-meta-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ground-action-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<main class="page-shell">
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-mark animate-glow">
+                <i class="fa-solid fa-map-location-dot"></i>
+            </div>
+            <div class="brand-copy">
+                <h2>Ground Inventory</h2>
+                <p>Manage cricket venues catalog</p>
+            </div>
+        </div>
+        <nav class="nav-links">
+            <a th:href="@{/admin/dashboard}"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+            <a th:href="@{/admin/users}"><i class="fa-solid fa-users"></i> Users</a>
+            <a th:href="@{/admin/bookings}"><i class="fa-solid fa-calendar-check"></i> Bookings</a>
+            <a class="button-link danger" th:href="@{/logout}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </nav>
+    </header>
+
+    <section class="content-grid ground-management-layout">
+        <article class="panel span-5 ground-form-panel">
+            <h3><i class="fa-solid fa-plus-circle" style="margin-right: 10px;"></i>Add New Ground</h3>
+            <p>Add new cricket venues to the live catalog. Changes are immediately available to users.</p>
+            <div class="alert-banner" th:if="${error}" th:text="${error}"></div>
+            <form th:action="@{/admin/grounds}" method="post" class="field-grid">
+                <div class="field">
+                    <label for="name"><i class="fa-solid fa-signature" style="margin-right: 6px;"></i>Ground Name</label>
+                    <input id="name" type="text" name="name" placeholder="e.g., Central Stadium Turf" required>
+                </div>
+                <div class="field">
+                    <label for="location"><i class="fa-solid fa-location-dot" style="margin-right: 6px;"></i>Location</label>
+                    <input id="location" type="text" name="location" placeholder="e.g., Hyderabad" required>
+                </div>
+                <div class="field">
+                    <label for="groundType"><i class="fa-solid fa-layer-group" style="margin-right: 6px;"></i>Ground Type</label>
+                    <select id="groundType" name="groundType" required>
+                        <option th:each="type : ${groundTypes}" th:value="${type}" th:text="${type}">TURF</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="availableTimeSlots"><i class="fa-solid fa-clock" style="margin-right: 6px;"></i>Available Time Slots</label>
+                    <input id="availableTimeSlots" type="text" name="availableTimeSlots" placeholder="e.g., 06:00-10:00, 17:00-22:00" required>
+                </div>
+                <div class="field">
+                    <label for="pricePerHour"><i class="fa-solid fa-money-bill" style="margin-right: 6px;"></i>Price Per Hour (Rs)</label>
+                    <input id="pricePerHour" type="number" min="1" step="0.01" name="pricePerHour" placeholder="e.g., 1500" required>
+                </div>
+                <button class="primary admin-ground-submit" type="submit">
+                    <i class="fa-solid fa-plus"></i> Add to Catalog
+                </button>
+            </form>
+        </article>
+
+        <section class="table-panel span-7 ground-catalog-panel">
+            <div class="table-header">
+                <div>
+                    <h2><i class="fa-solid fa-map" style="margin-right: 12px;"></i>Ground Catalog</h2>
+                    <p th:text="'Total venues available: ' + ${#lists.size(grounds)}">Total grounds: 0</p>
+                </div>
+                <span class="pill info"><i class="fa-solid fa-globe" style="margin-right: 8px;"></i>Live Catalog</span>
+            </div>
+            <div th:if="${#lists.isEmpty(grounds)}" class="empty-state">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <p>No grounds in catalog yet.</p>
+            </div>
+            <div class="ground-list" th:unless="${#lists.isEmpty(grounds)}">
+                <article class="ground-card" th:each="ground : ${grounds}">
+                    <div class="ground-card-main">
+                        <div class="ground-card-top">
+                            <div>
+                                <div class="ground-id" th:text="'#' + ${ground.id}">#1</div>
+                                <h3 class="ground-name" th:text="${ground.name}">Ground</h3>
+                            </div>
+                            <span class="mini-chip ground-type-chip" th:text="${ground.groundType}">TURF</span>
+                        </div>
+
+                        <div class="ground-meta-grid">
+                            <div class="ground-meta-item">
+                                <span class="ground-meta-label">Location</span>
+                                <span class="ground-meta-value" th:text="${ground.location}">City</span>
+                            </div>
+                            <div class="ground-meta-item">
+                                <span class="ground-meta-label">Price / Hr</span>
+                                <span class="ground-meta-value" th:text="'Rs ' + ${ground.pricePerHour}">Rs 0</span>
+                            </div>
+                            <div class="ground-meta-item ground-meta-wide">
+                                <span class="ground-meta-label">Available Slots</span>
+                                <span class="ground-meta-value" th:text="${ground.availableTimeSlots}">06:00-10:00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ground-actions">
+                        <a class="button-link danger ground-action-button" th:href="@{/admin/grounds/delete/{id}(id=${ground.id})}">
+                            <i class="fa-solid fa-trash-can"></i> Remove
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </section>
+</main>
+</body>
+</html>

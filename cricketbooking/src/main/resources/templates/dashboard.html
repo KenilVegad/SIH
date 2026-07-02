@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Cricket Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/app.css}">
+</head>
+<body>
+<main class="page-shell">
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-mark animate-glow">
+                <i class="fa-solid fa-baseball-bat-ball"></i>
+            </div>
+            <div class="brand-copy">
+                <h2>My Dashboard</h2>
+                <p th:text="${sessionName + ' | ' + sessionEmail}">User</p>
+            </div>
+        </div>
+        <nav class="nav-links">
+            <a th:href="@{/dashboard}"><i class="fa-solid fa-house"></i> Dashboard</a>
+            <a th:href="@{/book}"><i class="fa-solid fa-calendar-plus"></i> Book Ground</a>
+            <a th:href="@{/mybookings}"><i class="fa-solid fa-table-list"></i> My Bookings</a>
+            <a class="button-link danger" th:href="@{/logout}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div>
+            <span class="eyebrow"><i class="fa-solid fa-gauge-high"></i> Personal Command Center</span>
+            <h2>Your <span>Booking</span> Overview at a Glance</h2>
+            <p>
+                Track booking requests, wait for admin approval, confirm approved requests, and complete payment only when the slot is authorized.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" th:href="@{/book}">
+                    <i class="fa-solid fa-plus"></i> Book New Ground
+                </a>
+                <a class="button-link warning" th:href="@{/mybookings}">
+                    <i class="fa-solid fa-clock-rotate-left"></i> View All Bookings
+                </a>
+            </div>
+        </div>
+        <div class="hero-grid">
+            <article class="stat-card">
+                <span class="label"><i class="fa-solid fa-paper-plane" style="margin-right: 6px;"></i>Total Requests</span>
+                <p class="value" th:text="${totalBookings}">0</p>
+                <p class="subtext">All booking requests made with your account</p>
+            </article>
+            <article class="stat-card">
+                <span class="label"><i class="fa-solid fa-hourglass-half" style="margin-right: 6px;"></i>Pending</span>
+                <p class="value" th:text="${pendingRequests}">0</p>
+                <p class="subtext">Waiting for admin approval</p>
+            </article>
+            <article class="stat-card">
+                <span class="label"><i class="fa-solid fa-circle-check" style="margin-right: 6px;"></i>Approved</span>
+                <p class="value" th:text="${approvedRequests}">0</p>
+                <p class="subtext">Ready for confirmation and payment</p>
+            </article>
+            <article class="stat-card">
+                <span class="label"><i class="fa-solid fa-wallet" style="margin-right: 6px;"></i>Total Paid</span>
+                <p class="value" th:text="'Rs ' + ${totalSpent}">Rs 0</p>
+                <p class="subtext">Completed payments only</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-grid">
+        <article class="panel span-8">
+            <h3>Booking Features</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <strong><i class="fa-solid fa-list-check" style="color: var(--accent); margin-right: 10px;"></i>Live Ground Catalog</strong>
+                    Browse all available grounds with type, location, time slots, and price per hour.
+                </div>
+                <div class="feature-item">
+                    <strong><i class="fa-solid fa-user-shield" style="color: var(--accent-3); margin-right: 10px;"></i>Admin Approval</strong>
+                    Booking requests stay pending until an admin explicitly approves or rejects them.
+                </div>
+                <div class="feature-item">
+                    <strong><i class="fa-solid fa-credit-card" style="color: var(--danger); margin-right: 10px;"></i>Delayed Payment</strong>
+                    Payment is enabled only after approval and your own confirmation step.
+                </div>
+            </div>
+        </article>
+        <aside class="panel span-4">
+            <h3>Next Booking</h3>
+            <div class="feature-list" th:if="${nextBooking != null}">
+                <div class="feature-item">
+                    <strong th:text="${nextBooking.groundName}">Ground</strong>
+                    <span th:text="${nextBooking.date + ' at ' + nextBooking.time}">2026-04-27 at 18:00</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Status</strong>
+                    <span th:text="${nextBooking.status}">PENDING</span>
+                </div>
+            </div>
+            <div class="empty-state" th:if="${nextBooking == null}">
+                <i class="fa-solid fa-calendar-xmark"></i>
+                <p>No upcoming reservations</p>
+            </div>
+        </aside>
+    </section>
+</main>
+</body>
+</html>

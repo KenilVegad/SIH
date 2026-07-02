@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | Cricket Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/app.css}">
+</head>
+<body>
+<main class="auth-shell">
+    <section class="form-panel glow-accent">
+        <aside class="form-aside">
+            <div class="brand">
+                <div class="brand-mark animate-glow">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div class="brand-copy">
+                    <h2>Secure Access</h2>
+                    <p>Unified authentication for all user roles</p>
+                </div>
+            </div>
+            <div class="info-list">
+                <div class="info-item">
+                    <strong><i class="fa-solid fa-lock" style="margin-right: 8px;"></i>Military-Grade Security</strong>
+                    All passwords encrypted with BCrypt hashing algorithm ensuring maximum protection.
+                </div>
+                <div class="info-item">
+                    <strong><i class="fa-solid fa-route" style="margin-right: 8px;"></i>Smart Routing</strong>
+                    Automatic redirection based on role — Admins to control panel, Users to booking dashboard.
+                </div>
+                <div class="info-item">
+                    <strong><i class="fa-solid fa-clock-rotate-left" style="margin-right: 8px;"></i>Session Management</strong>
+                    Secure session handling with persistent login state across all pages.
+                </div>
+            </div>
+            <a class="helper-link" th:href="@{/}">
+                <i class="fa-solid fa-arrow-left"></i> Return to Home
+            </a>
+        </aside>
+        <div class="form-main">
+            <h2>Welcome Back</h2>
+            <p>Sign in to access your personalized dashboard and manage your cricket ground bookings.</p>
+            <div class="alert-banner" th:if="${error}" th:text="${error}"></div>
+            <form th:action="@{/login}" method="post" class="field-grid">
+                <div class="field">
+                    <label for="email"><i class="fa-solid fa-envelope" style="margin-right: 8px;"></i>Email Address</label>
+                    <input id="email" type="email" name="email" placeholder="your@email.com" required>
+                </div>
+                <div class="field">
+                    <label for="password"><i class="fa-solid fa-key" style="margin-right: 8px;"></i>Password</label>
+                    <input id="password" type="password" name="password" placeholder="Enter your secure password" required>
+                </div>
+                <button class="primary" type="submit" style="margin-top: 10px;">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In Securely
+                </button>
+            </form>
+            <a class="helper-link" th:href="@{/register}">
+                <i class="fa-solid fa-user-plus"></i> Create New Account
+            </a>
+        </div>
+    </section>
+</main>
+</body>
+</html>

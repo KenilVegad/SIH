@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Directory | Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/app.css}">
+</head>
+<body>
+<main class="page-shell">
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-mark animate-glow">
+                <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="brand-copy">
+                <h2>User Directory</h2>
+                <p>Platform user registry</p>
+            </div>
+        </div>
+        <nav class="nav-links">
+            <a th:href="@{/admin/dashboard}"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+            <a th:href="@{/admin/bookings}"><i class="fa-solid fa-calendar-check"></i> Bookings</a>
+            <a th:href="@{/admin/grounds}"><i class="fa-solid fa-map-location-dot"></i> Grounds</a>
+            <a class="button-link danger" th:href="@{/logout}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </nav>
+    </header>
+
+    <section class="table-panel" style="margin-top: 32px;">
+        <div class="table-header">
+            <div>
+                <h2><i class="fa-solid fa-address-book" style="margin-right: 12px;"></i>Registered Users</h2>
+                <p th:text="'Total registered accounts: ' + ${#lists.size(users)}">Total users: 0</p>
+            </div>
+            <span class="pill info"><i class="fa-solid fa-id-badge" style="margin-right: 8px;"></i>Role-Based Access</span>
+        </div>
+        <div th:if="${#lists.isEmpty(users)}" class="empty-state">
+            <i class="fa-solid fa-users-slash"></i>
+            <p>No registered users found.</p>
+        </div>
+        <table class="booking-table" th:unless="${#lists.isEmpty(users)}">
+            <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Full Name</th>
+                <th>Email Address</th>
+                <th>Mobile Number</th>
+                <th>Role</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}">1</td>
+                <td><strong th:text="${user.name}">Name</strong></td>
+                <td th:text="${user.email}">Email</td>
+                <td th:text="${user.mobileNumber}">9999999999</td>
+                <td>
+                    <span class="mini-chip" th:text="${user.role}" th:style="${user.role == 'ADMIN'} ? 'background: rgba(246, 211, 101, 0.15); color: var(--accent-3); border-color: rgba(246, 211, 101, 0.3);' : ''">USER</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Cricket Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/app.css}">
+</head>
+<body>
+<main class="page-shell">
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-mark animate-glow">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div class="brand-copy">
+                <h2>Admin Control Center</h2>
+                <p th:text="${sessionName + ' | ' + sessionEmail}">Administrator</p>
+            </div>
+        </div>
+        <nav class="nav-links">
+            <a th:href="@{/admin/dashboard}"><i class="fa-solid fa-gauge"></i> Overview</a>
+            <a th:href="@{/admin/users}"><i class="fa-solid fa-users"></i> Users</a>
+            <a th:href="@{/admin/bookings}"><i class="fa-solid fa-calendar-check"></i> Bookings</a>
+            <a th:href="@{/admin/grounds}"><i class="fa-solid fa-map-location-dot"></i> Grounds</a>
+            <a class="button-link danger" th:href="@{/logout}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div>
+            <span class="eyebrow"><i class="fa-solid fa-crown"></i> Administrative Command</span>
+            <h2>Platform <span>Management</span> & Analytics</h2>
+            <p>
+                Review booking requests, approve or reject them, and monitor paid revenue after users complete confirmation and payment.
+            </p>
+            <div class="alert-banner" th:if="${error}" th:text="${error}"></div>
+            <div class="hero-actions">
+                <a class="button-link primary" th:href="@{/admin/grounds}">
+                    <i class="fa-solid fa-plus"></i> Manage Grounds
+                </a>
+                <a class="button-link warning" th:href="@{/admin/bookings}">
+                    <i class="fa-solid fa-table-list"></i> Review Requests
+                </a>
+            </div>
+        </div>
+        <div class="hero-grid">
+            <article class="stat-card">
+                <span class="label"><i class="fa-solid fa-users" style="margin-right: 6px;"></i>Total Users</span>
+                <p class="value" th:text="${totalUsers}">0</p>
+                <p class="subtext">Registered accounts across the platform</p>
+            </article>
+            <article class="stat-card">
+                <span class="label"><i class="fa-solid fa-paper-plane" style="margin-right: 6px;"></i>Total Requests</span>
+                <p class="value" th:text="${totalBookings}">0</p>
+                <p class="subtext">All booking requests submitted by users</p>
+            </article>
+            <article class="stat-card">
+                <span class="label"><i class="fa-solid fa-hourglass-half" style="margin-right: 6px;"></i>Pending</span>
+                <p class="value" th:text="${pendingBookings}">0</p>
+                <p class="subtext">Waiting for admin approval or rejection</p>
+            </article>
+            <article class="stat-card">
+                <span class="label"><i class="fa-solid fa-circle-check" style="margin-right: 6px;"></i>Approved</span>
+                <p class="value" th:text="${approvedBookings}">0</p>
+                <p class="subtext">Ready for user confirmation and payment</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-grid">
+        <article class="panel span-7">
+            <h3>Recent Activity</h3>
+            <div class="feature-list" th:if="${!#lists.isEmpty(recentBookings)}">
+                <div class="feature-item" th:each="booking : ${recentBookings}">
+                    <strong th:text="${booking.groundName + ' | ' + booking.userEmail}" style="color: var(--accent);">Booking</strong>
+                    <span th:text="${booking.date + ' at ' + booking.time + ' | ' + booking.status}" style="color: var(--muted);"></span>
+                </div>
+            </div>
+            <div class="empty-state" th:if="${#lists.isEmpty(recentBookings)}">
+                <i class="fa-solid fa-clipboard-list" style="font-size: 2.5rem; margin-bottom: 16px; opacity: 0.5;"></i>
+                <p>No recent bookings to display.</p>
+            </div>
+        </article>
+        <aside class="panel span-5">
+            <h3>Metrics</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <strong>Paid Bookings</strong>
+                    <span th:text="${paidBookings} + ' completed payments'">0 completed payments</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Paid Revenue</strong>
+                    <span th:text="'Rs ' + ${totalRevenue}">Rs 0</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Grounds</strong>
+                    <span th:text="${totalGrounds} + ' active grounds'">0 active grounds</span>
+                </div>
+            </div>
+        </aside>
+    </section>
+</main>
+</body>
+</html>

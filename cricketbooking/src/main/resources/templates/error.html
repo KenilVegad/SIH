@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error | Cricket Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/app.css}">
+</head>
+<body>
+<main class="auth-shell">
+    <section class="form-panel">
+        <aside class="form-aside">
+            <div class="brand">
+                <div class="brand-mark">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div class="brand-copy">
+                    <h2>Request Failed</h2>
+                    <p th:text="${path}">/</p>
+                </div>
+            </div>
+            <a class="helper-link" th:href="@{/}">
+                <i class="fa-solid fa-house"></i> Return to Home
+            </a>
+        </aside>
+        <div class="form-main">
+            <h2>Something went wrong</h2>
+            <div class="alert-banner" th:text="${error}">Unexpected server error</div>
+            <div class="stack-actions">
+                <a class="button-link primary" th:href="@{/login}">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i> Go to Login
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

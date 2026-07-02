@@ -1,0 +1,103 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.example:cricketbooking >---------------------
+[INFO] Building  0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:4.0.5:run (default-cli) > test-compile @ cricketbooking >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ cricketbooking ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 12 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ cricketbooking ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 18 source files with javac [debug parameters release 17] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ cricketbooking ---
+[INFO] skip non existing resourceDirectory C:\Users\ASUS\Downloads\cricketbooking\cricketbooking\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ cricketbooking ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 17] to target\test-classes
+[INFO] 
+[INFO] <<< spring-boot:4.0.5:run (default-cli) < test-compile @ cricketbooking <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:4.0.5:run (default-cli) @ cricketbooking ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.5)
+
+2026-04-28T10:06:24.316+05:30  INFO 10860 --- [cricketbooking] [           main] c.e.c.CricketbookingApplication          : Starting CricketbookingApplication using Java 23.0.1 with PID 10860 (C:\Users\ASUS\Downloads\cricketbooking\cricketbooking\target\classes started by ASUS in C:\Users\ASUS\Downloads\cricketbooking\cricketbooking)
+2026-04-28T10:06:24.319+05:30  INFO 10860 --- [cricketbooking] [           main] c.e.c.CricketbookingApplication          : No active profile set, falling back to 1 default profile: "default"
+2026-04-28T10:06:24.830+05:30  INFO 10860 --- [cricketbooking] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-28T10:06:24.881+05:30  INFO 10860 --- [cricketbooking] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 41 ms. Found 3 JPA repository interfaces.
+2026-04-28T10:06:25.311+05:30  INFO 10860 --- [cricketbooking] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-04-28T10:06:25.325+05:30  INFO 10860 --- [cricketbooking] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-28T10:06:25.325+05:30  INFO 10860 --- [cricketbooking] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-28T10:06:25.370+05:30  INFO 10860 --- [cricketbooking] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 999 ms
+2026-04-28T10:06:25.501+05:30  INFO 10860 --- [cricketbooking] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-28T10:06:25.541+05:30  INFO 10860 --- [cricketbooking] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-28T10:06:25.903+05:30  INFO 10860 --- [cricketbooking] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-28T10:06:25.929+05:30  INFO 10860 --- [cricketbooking] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-28T10:06:30.190+05:30  INFO 10860 --- [cricketbooking] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:file:./data/cricketbooking user=SA
+2026-04-28T10:06:30.194+05:30  INFO 10860 --- [cricketbooking] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-28T10:06:30.242+05:30  INFO 10860 --- [cricketbooking] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/cricketbooking]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: CRICKETBOOKING/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-28T10:06:31.024+05:30  INFO 10860 --- [cricketbooking] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-28T10:06:31.070+05:30  INFO 10860 --- [cricketbooking] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-28T10:06:31.133+05:30  INFO 10860 --- [cricketbooking] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-28T10:06:32.117+05:30  INFO 10860 --- [cricketbooking] [           main] o.s.b.w.a.WelcomePageHandlerMapping      : Adding welcome page template: index
+2026-04-28T10:06:32.380+05:30  INFO 10860 --- [cricketbooking] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-04-28T10:06:32.386+05:30  INFO 10860 --- [cricketbooking] [           main] c.e.c.CricketbookingApplication          : Started CricketbookingApplication in 8.409 seconds (process running for 8.755)
+Hibernate: select u1_0.id,u1_0.email,u1_0.mobile_number,u1_0.name,u1_0.password,u1_0.role from users u1_0 where u1_0.email=?
+Hibernate: select count(*) from grounds g1_0
+2026-04-28T10:06:45.109+05:30  INFO 10860 --- [cricketbooking] [nio-8080-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-28T10:06:45.110+05:30  INFO 10860 --- [cricketbooking] [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-28T10:06:45.111+05:30  INFO 10860 --- [cricketbooking] [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+Hibernate: select u1_0.id,u1_0.email,u1_0.mobile_number,u1_0.name,u1_0.password,u1_0.role from users u1_0 where u1_0.email=?
+Hibernate: select u1_0.id,u1_0.email,u1_0.mobile_number,u1_0.name,u1_0.password,u1_0.role from users u1_0 where u1_0.email=?
+Hibernate: select g1_0.id,g1_0.available_time_slots,g1_0.facilities,g1_0.ground_type,g1_0.location,g1_0.name,g1_0.price_per_hour from grounds g1_0 where g1_0.id=?
+Hibernate: select b1_0.id,b1_0.approved_at,b1_0.confirmed_at,b1_0.date,b1_0.duration_hours,b1_0.ground_id,b1_0.ground_name,b1_0.paid_at,b1_0.payment_completed,b1_0.payment_enabled,b1_0.price_per_hour,b1_0.requested_at,b1_0.slot,b1_0.status,b1_0.time,b1_0.total_price,b1_0.user_id,b1_0.user_email,b1_0.user_mobile from bookings b1_0 where b1_0.user_id=? order by b1_0.date,b1_0.time
+Hibernate: select b1_0.id,b1_0.approved_at,b1_0.confirmed_at,b1_0.date,b1_0.duration_hours,b1_0.ground_id,b1_0.ground_name,b1_0.paid_at,b1_0.payment_completed,b1_0.payment_enabled,b1_0.price_per_hour,b1_0.requested_at,b1_0.slot,b1_0.status,b1_0.time,b1_0.total_price,b1_0.user_id,b1_0.user_email,b1_0.user_mobile from bookings b1_0 where b1_0.user_id=? order by b1_0.date,b1_0.time
+Hibernate: select case when count(b1_0.id)>0 then true else false end from bookings b1_0 where b1_0.ground_id=? and b1_0.date=? and b1_0.slot=? and b1_0.status not in ('REJECTED','CANCELLED')
+Hibernate: select u1_0.id,u1_0.email,u1_0.mobile_number,u1_0.name,u1_0.password,u1_0.role from users u1_0 where u1_0.id=?
+Hibernate: insert into bookings (approved_at,confirmed_at,date,duration_hours,ground_id,ground_name,paid_at,payment_completed,payment_enabled,price_per_hour,requested_at,slot,status,time,total_price,user_id,user_email,user_mobile,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: select b1_0.id,b1_0.approved_at,b1_0.confirmed_at,b1_0.date,b1_0.duration_hours,b1_0.ground_id,b1_0.ground_name,b1_0.paid_at,b1_0.payment_completed,b1_0.payment_enabled,b1_0.price_per_hour,b1_0.requested_at,b1_0.slot,b1_0.status,b1_0.time,b1_0.total_price,b1_0.user_id,b1_0.user_email,b1_0.user_mobile from bookings b1_0 order by b1_0.date,b1_0.time
+Hibernate: select coalesce(sum(b1_0.total_price),0) from bookings b1_0 where b1_0.payment_completed=true
+Hibernate: select b1_0.id,b1_0.approved_at,b1_0.confirmed_at,b1_0.date,b1_0.duration_hours,b1_0.ground_id,b1_0.ground_name,b1_0.paid_at,b1_0.payment_completed,b1_0.payment_enabled,b1_0.price_per_hour,b1_0.requested_at,b1_0.slot,b1_0.status,b1_0.time,b1_0.total_price,b1_0.user_id,b1_0.user_email,b1_0.user_mobile from bookings b1_0 where b1_0.id=?
+Hibernate: select case when count(b1_0.id)>0 then true else false end from bookings b1_0 where b1_0.ground_id=? and b1_0.date=? and b1_0.slot=? and b1_0.id<>? and b1_0.status not in ('REJECTED','CANCELLED')
+Hibernate: select b1_0.id,b1_0.approved_at,b1_0.confirmed_at,b1_0.date,b1_0.duration_hours,b1_0.ground_id,b1_0.ground_name,b1_0.paid_at,b1_0.payment_completed,b1_0.payment_enabled,b1_0.price_per_hour,b1_0.requested_at,b1_0.slot,b1_0.status,b1_0.time,b1_0.total_price,b1_0.user_id,b1_0.user_email,b1_0.user_mobile from bookings b1_0 where b1_0.id=?
+Hibernate: select b1_0.id,b1_0.approved_at,b1_0.confirmed_at,b1_0.date,b1_0.duration_hours,b1_0.ground_id,b1_0.ground_name,b1_0.paid_at,b1_0.payment_completed,b1_0.payment_enabled,b1_0.price_per_hour,b1_0.requested_at,b1_0.slot,b1_0.status,b1_0.time,b1_0.total_price,b1_0.user_id,b1_0.user_email,b1_0.user_mobile from bookings b1_0 where b1_0.id=?
+Hibernate: update bookings set approved_at=?,confirmed_at=?,date=?,duration_hours=?,ground_id=?,ground_name=?,paid_at=?,payment_completed=?,payment_enabled=?,price_per_hour=?,requested_at=?,slot=?,status=?,time=?,total_price=?,user_id=?,user_email=?,user_mobile=? where id=?
+Hibernate: select b1_0.id,b1_0.approved_at,b1_0.confirmed_at,b1_0.date,b1_0.duration_hours,b1_0.ground_id,b1_0.ground_name,b1_0.paid_at,b1_0.payment_completed,b1_0.payment_enabled,b1_0.price_per_hour,b1_0.requested_at,b1_0.slot,b1_0.status,b1_0.time,b1_0.total_price,b1_0.user_id,b1_0.user_email,b1_0.user_mobile from bookings b1_0 where b1_0.id=?
+Hibernate: select b1_0.id,b1_0.approved_at,b1_0.confirmed_at,b1_0.date,b1_0.duration_hours,b1_0.ground_id,b1_0.ground_name,b1_0.paid_at,b1_0.payment_completed,b1_0.payment_enabled,b1_0.price_per_hour,b1_0.requested_at,b1_0.slot,b1_0.status,b1_0.time,b1_0.total_price,b1_0.user_id,b1_0.user_email,b1_0.user_mobile from bookings b1_0 where b1_0.id=?
+Hibernate: select b1_0.id,b1_0.approved_at,b1_0.confirmed_at,b1_0.date,b1_0.duration_hours,b1_0.ground_id,b1_0.ground_name,b1_0.paid_at,b1_0.payment_completed,b1_0.payment_enabled,b1_0.price_per_hour,b1_0.requested_at,b1_0.slot,b1_0.status,b1_0.time,b1_0.total_price,b1_0.user_id,b1_0.user_email,b1_0.user_mobile from bookings b1_0 where b1_0.id=?
+Hibernate: update bookings set approved_at=?,confirmed_at=?,date=?,duration_hours=?,ground_id=?,ground_name=?,paid_at=?,payment_completed=?,payment_enabled=?,price_per_hour=?,requested_at=?,slot=?,status=?,time=?,total_price=?,user_id=?,user_email=?,user_mobile=? where id=?
+Hibernate: select b1_0.id,b1_0.approved_at,b1_0.confirmed_at,b1_0.date,b1_0.duration_hours,b1_0.ground_id,b1_0.ground_name,b1_0.paid_at,b1_0.payment_completed,b1_0.payment_enabled,b1_0.price_per_hour,b1_0.requested_at,b1_0.slot,b1_0.status,b1_0.time,b1_0.total_price,b1_0.user_id,b1_0.user_email,b1_0.user_mobile from bookings b1_0 where b1_0.id=?
+Hibernate: select b1_0.id,b1_0.approved_at,b1_0.confirmed_at,b1_0.date,b1_0.duration_hours,b1_0.ground_id,b1_0.ground_name,b1_0.paid_at,b1_0.payment_completed,b1_0.payment_enabled,b1_0.price_per_hour,b1_0.requested_at,b1_0.slot,b1_0.status,b1_0.time,b1_0.total_price,b1_0.user_id,b1_0.user_email,b1_0.user_mobile from bookings b1_0 where b1_0.id=?
+Hibernate: select b1_0.id,b1_0.approved_at,b1_0.confirmed_at,b1_0.date,b1_0.duration_hours,b1_0.ground_id,b1_0.ground_name,b1_0.paid_at,b1_0.payment_completed,b1_0.payment_enabled,b1_0.price_per_hour,b1_0.requested_at,b1_0.slot,b1_0.status,b1_0.time,b1_0.total_price,b1_0.user_id,b1_0.user_email,b1_0.user_mobile from bookings b1_0 where b1_0.id=?
+Hibernate: update bookings set approved_at=?,confirmed_at=?,date=?,duration_hours=?,ground_id=?,ground_name=?,paid_at=?,payment_completed=?,payment_enabled=?,price_per_hour=?,requested_at=?,slot=?,status=?,time=?,total_price=?,user_id=?,user_email=?,user_mobile=? where id=?
+Hibernate: select b1_0.id,b1_0.approved_at,b1_0.confirmed_at,b1_0.date,b1_0.duration_hours,b1_0.ground_id,b1_0.ground_name,b1_0.paid_at,b1_0.payment_completed,b1_0.payment_enabled,b1_0.price_per_hour,b1_0.requested_at,b1_0.slot,b1_0.status,b1_0.time,b1_0.total_price,b1_0.user_id,b1_0.user_email,b1_0.user_mobile from bookings b1_0 order by b1_0.date,b1_0.time
+Hibernate: select b1_0.id,b1_0.approved_at,b1_0.confirmed_at,b1_0.date,b1_0.duration_hours,b1_0.ground_id,b1_0.ground_name,b1_0.paid_at,b1_0.payment_completed,b1_0.payment_enabled,b1_0.price_per_hour,b1_0.requested_at,b1_0.slot,b1_0.status,b1_0.time,b1_0.total_price,b1_0.user_id,b1_0.user_email,b1_0.user_mobile from bookings b1_0 where b1_0.user_id=? order by b1_0.date,b1_0.time
+Hibernate: select coalesce(sum(b1_0.total_price),0) from bookings b1_0 where b1_0.payment_completed=true
+Hibernate: select b1_0.id,b1_0.approved_at,b1_0.confirmed_at,b1_0.date,b1_0.duration_hours,b1_0.ground_id,b1_0.ground_name,b1_0.paid_at,b1_0.payment_completed,b1_0.payment_enabled,b1_0.price_per_hour,b1_0.requested_at,b1_0.slot,b1_0.status,b1_0.time,b1_0.total_price,b1_0.user_id,b1_0.user_email,b1_0.user_mobile from bookings b1_0 where b1_0.user_id=? order by b1_0.date,b1_0.time

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | Cricket Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/app.css}">
+</head>
+<body>
+<main class="auth-shell">
+    <section class="form-panel glow-accent">
+        <aside class="form-aside">
+            <div class="brand">
+                <div class="brand-mark animate-glow">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <div class="brand-copy">
+                    <h2>Join Today</h2>
+                    <p>Start your cricket booking journey</p>
+                </div>
+            </div>
+            <div class="info-list">
+                <div class="info-item">
+                    <strong><i class="fa-solid fa-fingerprint" style="margin-right: 8px;"></i>Unique Identity</strong>
+                    Each email address can only be registered once ensuring secure account ownership.
+                </div>
+                <div class="info-item">
+                    <strong><i class="fa-solid fa-user-tag" style="margin-right: 8px;"></i>User Role</strong>
+                    New accounts are created as standard users with full booking privileges.
+                </div>
+                <div class="info-item">
+                    <strong><i class="fa-solid fa-bolt" style="margin-right: 8px;"></i>Instant Access</strong>
+                    Start booking grounds immediately after registration — no waiting required.
+                </div>
+            </div>
+            <a class="helper-link" th:href="@{/login}">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i> Already have an account? Sign in
+            </a>
+        </aside>
+        <div class="form-main">
+            <h2>Create Account</h2>
+            <p>Fill in your details to set up your personalized booking account.</p>
+            <div class="alert-banner" th:if="${error}" th:text="${error}"></div>
+            <form th:action="@{/register}" method="post" class="field-grid">
+                <div class="field">
+                    <label for="name"><i class="fa-solid fa-id-card" style="margin-right: 8px;"></i>Full Name</label>
+                    <input id="name" type="text" name="name" placeholder="Enter your full name" required>
+                </div>
+                <div class="field">
+                    <label for="email"><i class="fa-solid fa-envelope" style="margin-right: 8px;"></i>Email Address</label>
+                    <input id="email" type="email" name="email" placeholder="your@email.com" required>
+                </div>
+                <div class="field">
+                    <label for="mobileNumber"><i class="fa-solid fa-phone" style="margin-right: 8px;"></i>Mobile Number</label>
+                    <input id="mobileNumber" type="tel" name="mobileNumber" placeholder="Enter your mobile number" required>
+                </div>
+                <div class="field">
+                    <label for="password"><i class="fa-solid fa-lock" style="margin-right: 8px;"></i>Create Password</label>
+                    <input id="password" type="password" name="password" placeholder="Choose a strong password" required>
+                </div>
+                <button class="primary" type="submit" style="margin-top: 10px;">
+                    <i class="fa-solid fa-check"></i> Create My Account
+                </button>
+            </form>
+        </div>
+    </section>
+</main>
+</body>
+</html>

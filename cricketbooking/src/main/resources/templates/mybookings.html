@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings | Cricket Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/app.css}">
+</head>
+<body>
+<main class="page-shell">
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-mark animate-glow">
+                <i class="fa-solid fa-list-check"></i>
+            </div>
+            <div class="brand-copy">
+                <h2>My Bookings</h2>
+                <p th:text="${sessionEmail}">user@example.com</p>
+            </div>
+        </div>
+        <nav class="nav-links">
+            <a th:href="@{/dashboard}"><i class="fa-solid fa-house"></i> Dashboard</a>
+            <a th:href="@{/book}"><i class="fa-solid fa-calendar-plus"></i> Book Ground</a>
+            <a class="button-link danger" th:href="@{/logout}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </nav>
+    </header>
+
+    <section class="table-panel" style="margin-top: 32px;">
+        <div class="table-header">
+            <div>
+                <h2><i class="fa-solid fa-calendar-days" style="margin-right: 12px;"></i>Reservation History</h2>
+                <p th:text="'Total requests: ' + ${#lists.size(bookings)} + ' | Total paid: Rs ' + ${totalSpent}">Total requests: 0</p>
+            </div>
+            <span class="pill"><i class="fa-solid fa-database" style="margin-right: 8px;"></i>Approval Workflow</span>
+        </div>
+
+        <div th:if="${#lists.isEmpty(bookings)}" class="empty-state">
+            <i class="fa-solid fa-calendar-xmark"></i>
+            <p>No bookings found for your account yet.</p>
+            <div class="stack-actions" style="justify-content: center; margin-top: 0;">
+                <a class="button-link primary" th:href="@{/book}">
+                    <i class="fa-solid fa-plus"></i> Create Your First Booking
+                </a>
+            </div>
+        </div>
+
+        <div th:unless="${#lists.isEmpty(bookings)}">
+            <table class="booking-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ground Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Duration</th>
+                    <th>Status</th>
+                    <th>Rate/Hr</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="booking : ${bookings}">
+                    <td th:text="${booking.id}">1</td>
+                    <td><strong th:text="${booking.groundName}" style="color: var(--accent);">Ground</strong></td>
+                    <td th:text="${booking.date}">2026-04-27</td>
+                    <td th:text="${booking.time}">18:00</td>
+                    <td th:text="${booking.durationHours + ' hrs'}">1 hr</td>
+                    <td>
+                        <span class="mini-chip" th:text="${booking.status == T(com.example.cricketbooking.BookingStatus).PENDING ? 'REQUESTED' : booking.status}">REQUESTED</span>
+                    </td>
+                    <td th:text="'Rs ' + ${booking.pricePerHour}">Rs 0</td>
+                    <td><strong th:text="'Rs ' + ${booking.totalPrice}" style="color: var(--accent);">Rs 0</strong></td>
+                    <td>
+                        <div class="stack-actions" style="margin-top: 0;">
+                            <a class="button-link primary"
+                               th:if="${booking.status == T(com.example.cricketbooking.BookingStatus).APPROVED}"
+                               th:href="@{/confirm/{id}(id=${booking.id})}">
+                                <i class="fa-solid fa-check"></i> Confirm
+                            </a>
+                            <a class="button-link warning"
+                               th:if="${booking.status == T(com.example.cricketbooking.BookingStatus).CONFIRMED and booking.paymentEnabled and !booking.paymentCompleted}"
+                               th:href="@{/pay/{id}(id=${booking.id})}">
+                                <i class="fa-solid fa-credit-card"></i> Pay
+                            </a>
+                            <a class="button-link danger"
+                               th:if="${booking.status != T(com.example.cricketbooking.BookingStatus).COMPLETED and booking.status != T(com.example.cricketbooking.BookingStatus).REJECTED and booking.status != T(com.example.cricketbooking.BookingStatus).CANCELLED}"
+                               th:href="@{/cancel/{id}(id=${booking.id})}">
+                                <i class="fa-solid fa-trash-can"></i> Cancel
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

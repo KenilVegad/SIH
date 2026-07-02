@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Ground | Cricket Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/app.css}">
+</head>
+<body>
+<main class="auth-shell">
+    <section class="form-panel glow-accent">
+        <aside class="form-aside">
+            <div class="brand">
+                <div class="brand-mark animate-glow">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div class="brand-copy">
+                    <h2>Book Ground</h2>
+                    <p>Reserve your perfect cricket venue</p>
+                </div>
+            </div>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <strong><i class="fa-solid fa-user" style="margin-right: 6px;"></i>Logged In As</strong>
+                    <div class="summary-value" th:text="${sessionEmail}" style="font-size: 1.1rem;">user@example.com</div>
+                </div>
+                <div class="summary-card">
+                    <strong><i class="fa-solid fa-shield-halved" style="margin-right: 6px;"></i>Approval Flow</strong>
+                    Booking starts as a request and moves to payment only after admin approval and user confirmation.
+                </div>
+            </div>
+            <div class="stack-actions">
+                <a class="button-link secondary" th:href="@{/dashboard}">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+                </a>
+            </div>
+        </aside>
+        <div class="form-main">
+            <h2>New Reservation</h2>
+            <p>Select your preferred ground, schedule, and duration. This submits a booking request for admin review.</p>
+            <div class="alert-banner" th:if="${error}" th:text="${error}"></div>
+            <form th:action="@{/book}" method="post" class="field-grid">
+                <div class="field">
+                    <label for="groundId"><i class="fa-solid fa-map-location-dot" style="margin-right: 8px;"></i>Select Ground</label>
+                    <select id="groundId" name="groundId" required>
+                        <option value="">Choose a ground from catalog</option>
+                        <option th:each="ground : ${grounds}"
+                                th:value="${ground.id}"
+                                th:text="${ground.name + ' | ' + ground.location + ' | ' + ground.groundType + ' | Rs ' + ground.pricePerHour + '/hr'}"
+                                th:attr="data-price=${ground.pricePerHour},data-location=${ground.location},data-slots=${ground.availableTimeSlots},data-type=${ground.groundType}">
+                        </option>
+                    </select>
+                </div>
+                <div class="split-grid">
+                    <div class="field">
+                        <label for="date"><i class="fa-solid fa-calendar" style="margin-right: 8px;"></i>Booking Date</label>
+                        <input id="date" type="date" name="date" required>
+                    </div>
+                    <div class="field">
+                        <label for="time"><i class="fa-solid fa-clock" style="margin-right: 8px;"></i>Start Time</label>
+                        <input id="time" type="time" name="time" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="durationHours"><i class="fa-solid fa-hourglass" style="margin-right: 8px;"></i>Duration</label>
+                    <select id="durationHours" name="durationHours" required>
+                        <option value="1">1 hour</option>
+                        <option value="2">2 hours</option>
+                        <option value="3">3 hours</option>
+                        <option value="4">4 hours</option>
+                        <option value="5">5 hours</option>
+                    </select>
+                </div>
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <strong><i class="fa-solid fa-location-arrow" style="margin-right: 6px;"></i>Location</strong>
+                        <div id="groundLocation" class="summary-value" style="font-size: 1.2rem;">Select a ground</div>
+                    </div>
+                    <div class="summary-card">
+                        <strong><i class="fa-solid fa-layer-group" style="margin-right: 6px;"></i>Ground Type</strong>
+                        <div id="groundType" class="summary-value" style="font-size: 1.2rem;">Select a ground</div>
+                    </div>
+                    <div class="summary-card">
+                        <strong><i class="fa-solid fa-clock" style="margin-right: 6px;"></i>Available Slots</strong>
+                        <div id="groundSlots" class="summary-value" style="font-size: 1rem;">Select a ground</div>
+                    </div>
+                    <div class="summary-card">
+                        <strong><i class="fa-solid fa-tag" style="margin-right: 6px;"></i>Rate/Hour</strong>
+                        <div id="pricePerHour" class="summary-value">Rs 0</div>
+                    </div>
+                    <div class="summary-card" style="background: rgba(0, 217, 163, 0.08); border-color: rgba(0, 217, 163, 0.2);">
+                        <strong><i class="fa-solid fa-money-bill-wave" style="margin-right: 6px;"></i>Total Cost</strong>
+                        <div id="totalPrice" class="summary-value accent-text" style="font-size: 1.8rem;">Rs 0</div>
+                    </div>
+                </div>
+                <button class="primary" type="submit" style="margin-top: 10px;">
+                    <i class="fa-solid fa-paper-plane"></i> Send Booking Request
+                </button>
+            </form>
+        </div>
+    </section>
+</main>
+
+<script>
+    const groundSelect = document.getElementById('groundId');
+    const durationSelect = document.getElementById('durationHours');
+    const pricePerHour = document.getElementById('pricePerHour');
+    const totalPrice = document.getElementById('totalPrice');
+    const groundLocation = document.getElementById('groundLocation');
+    const groundType = document.getElementById('groundType');
+    const groundSlots = document.getElementById('groundSlots');
+
+    function updateBilling() {
+        const selected = groundSelect.options[groundSelect.selectedIndex];
+        const price = Number(selected?.dataset?.price || 0);
+        const duration = Number(durationSelect.value || 1);
+        const location = selected?.dataset?.location || 'Select a ground';
+        const type = selected?.dataset?.type || 'Select a ground';
+        const slots = selected?.dataset?.slots || 'Select a ground';
+
+        groundLocation.textContent = location;
+        groundType.textContent = type;
+        groundSlots.textContent = slots;
+        pricePerHour.textContent = `Rs ${price}`;
+        totalPrice.textContent = `Rs ${price * duration}`;
+    }
+
+    groundSelect.addEventListener('change', updateBilling);
+    durationSelect.addEventListener('change', updateBilling);
+    updateBilling();
+</script>
+</body>
+</html>
